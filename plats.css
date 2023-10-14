@@ -1,0 +1,66 @@
+*{
+    margin: 0px;
+    padding: 0px;
+font-family: 'Manrope';  
+}
+:root{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    background-color:#dcd9d9;
+    
+}
+img{position: relative;
+    width: 100%;
+    height: 253px;
+    border-radius: 20px 20px 0 0;
+}
+.time{
+    position: absolute;
+    
+    z-index: auto;
+    background-color: #FFD15B;
+    color: black;
+    padding: 0 10px;
+    border-radius: 14px;
+}
+.article-recette{
+    width: 30%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.Recette{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+.info-recette{
+    height: 500px;
+    padding: 15px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.description-recette{
+    height: 248px;
+}
+.tous-ingredients{
+    height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.ingredient1,.ingredient2,.ingredient3{
+    width: 50%;
+}
+.quantity{
+    display: flex;
+    gap: 2px;
+}
+h4{
+    font-size: 14px;
+}
