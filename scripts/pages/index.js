@@ -1,61 +1,81 @@
-
-import {recipes} from "../../recipes.js";
  
+import { recipes } from "../../recipes.js";
 
- function getRecettes(recipes) {      
+function getRecettes(recipes) {
+ const numberRecettes=recipes.length
+ const spanNumberRecettes=document.querySelector(".number-recettes")
+  
+ spanNumberRecettes.innerHTML=`${numberRecettes} recettes`
+ 
+    recipes.forEach((recette, index) => {
+      
+        const sectionRecette = document.querySelector(".Recette");
 
-    recipes.forEach((recette,index) => {
-        const sectionRecette=document.querySelector(".Recette");
-       
-        const templateRecettes=recetteTemplate(recette);
-        const cartDomRecettes=templateRecettes.cartDomRecettes()
-         
+        const templateRecettes = recetteTemplate(recette,numberRecettes);
+        const cartDomRecettes = templateRecettes.cartDomRecettes(index)
         sectionRecette.appendChild(cartDomRecettes);
-        getIngredients(recipes.ingredients,index)
-    }); 
-   
+        getIngredients(recette, index)       
+ 
+    });  
 }
-  function getIngredients(ingredients,index) { 
-      let toutesIngredients=document.getElementById(`#toutes_ingredients_${index}`)
-      console.log(recipes)
-     ingredients.forEach((ingredient) => {
-          
+ 
+  //actualiser l'interface l'orsque l'utilisateur entre 
+        //des caractére sur la barre de recherche
+        const error=document.querySelector(".error")
+        let inputSearchbar=document.getElementById(`searchbar`);       
         
-         const templateRecettes=recetteTemplate(ingredient);
-         const cartDomIngredient=templateRecettes.cartDomIngredient()
-          
-         toutesIngredients.appendChild(cartDomIngredient);
-     }); 
-    
- }
-  function init(){   
-     console.log(recipes)
-   getRecettes(recipes)
+       inputSearchbar.addEventListener("keyup",function search_recette(e) {
+           console.log(e.target.value)
    
-
+       let RegExp = /^[a-zA-Z-\s]+$/;
+       
+       if (RegExp.test(e.target.value) == false || e.target.value.length < 3) {
+           error.innerHTML = "Veuillez entrez au moins trois caracteres";
+            
+       } else {             
+           error.innerHTML="";
+            let valueSerchbar=e.target.value.toLowerCase()
+            
+               console.log(valueSerchbar)
+               const ingredient= recipes.reduce((acc, { ingredients }) => {
+              return [...acc, ...ingredients.map(({ ingredient }) => ingredient)];}, [])
+                 console.log("ingredient de chaque recette",ingredient)
+            
+            const tabRecipesIngredient=recipes.filter((el)=>el.ingredients.some((item)=>
+                                         (item.ingredient).toLowerCase().includes(valueSerchbar)))
+            console.log(tabRecipesIngredient)
+               const TabRecipesName=recipes.filter(({name})=>name.toLowerCase().includes(valueSerchbar)) 
+               const TabRecipesDescription=recipes.filter(({description})=>description.toLowerCase().includes(valueSerchbar))                             
+               const recipesFiltrer=TabRecipesName.concat(TabRecipesDescription,tabRecipesIngredient)                                   
+              
+                   console.log(recipesFiltrer)
+                   const sectionRecette = document.querySelector(".Recette");
+                     
+                    sectionRecette.innerHTML="";
+                    
+                   if(recipesFiltrer){
+                       getRecettes(recipesFiltrer)
+                   }
+                                   
+    
+            }       
+   }
+  ) 
+   
+function getIngredients(recette, index) {
+    let toutesIngredients = document.querySelector(`.toutes_ingredients_${index}`)
+    
+    recette.ingredients.forEach((ingredient) => {
+ 
+        const templateRecettes = recetteTemplate(ingredient);
+        const cartDomIngredient = templateRecettes.cartDomIngredients(ingredient)
+        toutesIngredients.appendChild(cartDomIngredient);
+    });    
 }
-init();
- /*<div class="ingredient1">
-                                    <h4>${ingredient1}</h4>
-                                    <div class="quantity">
-                                    <h5>${quantity1}</h5>
-                                    <h5 class="unit">${valeurUnit}</h5></div>
-                               </div>
-                               <div class="ingredient2">
-                                    <h4>${ingredient2}</h4>
-                                    <div class="quantity">
-                                    <h5>${quantity2}</h5>
-                                    <h5 class="unit">${valeurUnit2}</h5></div>
-                               </div>
-                               <div class="ingredient3">
-                                    <h4>${ingredient3}</h4>
-                                    <div class="quantity">
-                                    <h5>${quantity3}</h5>
-                                    <h5 class="unit">${valeurUnit3}</h5></div>
-                               </div> 
-                               <div class="ingredient3">
-                                    <h4>${ingredient4}</h4>
-                                    <div class="quantity">
-                                    <h5>${quantity4}</h5>
-                                    <h5 class="unit">${valeurUnit3}</h5></div>
-                               </div>*/                 
+ 
+function init() {      
+     
+     getRecettes(recipes)
+ //getListRecette(recipes)
+ }
+ init();
