@@ -40,24 +40,25 @@ function getRecettes(recipes) {
                const ingredient= recipes.reduce((acc, { ingredients }) => {
               return [...acc, ...ingredients.map(({ ingredient }) => ingredient)];}, [])
                  console.log("ingredient de chaque recette",ingredient)
-            
+            //trier les recette par raport au ingredients
             const tabRecipesIngredient=recipes.filter((el)=>el.ingredients.some((item)=>
                                          (item.ingredient).toLowerCase().includes(valueSerchbar)))
-            console.log(tabRecipesIngredient)
+                console.log(tabRecipesIngredient)
+                //trier les recette par raport au titrede recette
                const TabRecipesName=recipes.filter(({name})=>name.toLowerCase().includes(valueSerchbar)) 
+               //trier les recette par raport au description
                const TabRecipesDescription=recipes.filter(({description})=>description.toLowerCase().includes(valueSerchbar))                             
-               const recipesFiltrer=TabRecipesName.concat(TabRecipesDescription,tabRecipesIngredient)                                   
-              
-                   console.log(recipesFiltrer)
+                                                  
+                const recipesfiltrer=[...tabRecipesIngredient,...TabRecipesName,...TabRecipesDescription]
+                   
+                     
+                    var uniqueRecipesFiltrer = [...new Set(recipesfiltrer)]
+                    console.log("avec la metode spread new",uniqueRecipesFiltrer)
+                     
                    const sectionRecette = document.querySelector(".Recette");
                      
-                    sectionRecette.innerHTML="";
-                    
-                   if(recipesFiltrer){
-                       getRecettes(recipesFiltrer)
-                   }
-                                   
-    
+                    sectionRecette.innerHTML="";  
+                       getRecettes(uniqueRecipesFiltrer)  
             }       
    }
   ) 
