@@ -37,9 +37,9 @@ function getRecettes(recipes) {
             let valueSerchbar=e.target.value.toLowerCase()
             
                console.log(valueSerchbar)
-               const ingredient= recipes.reduce((acc, { ingredients }) => {
-              return [...acc, ...ingredients.map(({ ingredient }) => ingredient)];}, [])
-                 console.log("ingredient de chaque recette",ingredient)
+            //    const ingredient= recipes.reduce((acc, { ingredients }) => {
+            //   return [...acc, ...ingredients.map(({ ingredient }) => ingredient)];}, [])
+            //      console.log("ingredient de chaque recette",ingredient)
             //trier les recette par raport au ingredients
             const tabRecipesIngredient=recipes.filter((el)=>el.ingredients.some((item)=>
                                          (item.ingredient).toLowerCase().includes(valueSerchbar)))
@@ -57,8 +57,25 @@ function getRecettes(recipes) {
                      
                    const sectionRecette = document.querySelector(".Recette");
                      
-                    sectionRecette.innerHTML="";  
-                       getRecettes(uniqueRecipesFiltrer)  
+                    sectionRecette.innerHTML="";
+                    if(uniqueRecipesFiltrer){
+                       getRecettes(uniqueRecipesFiltrer)   
+                    }  
+                    //recuperer tous les ingredient de recettes filtrer 
+                    const ingredientRecherche=uniqueRecipesFiltrer.reduce((acc,{ingredients})=>{
+                                               return [...acc,...ingredients.map(({ ingredient }) => 
+                                                ingredient)];},[])
+                     console.log(ingredientRecherche)
+                     const contnerIngredient=document.getElementById("contnerIngredients")
+                     
+                     ingredientRecherche.forEach((ingredient)=>{
+                      contnerIngredient.innerHTML+=`<option >${ingredient}<option>`
+                     }) 
+                     contnerIngredient.addEventListener("click",ouvreListe)
+                     function ouvreListe(e){
+                       const  inputIngredient=document.getElementById("input-ingredient")
+                       inputIngredient.style.display="block"
+                     }
             }       
    }
   ) 

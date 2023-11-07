@@ -128,3 +128,11 @@ h4{font-weight: 500;
     font-size: 14px;
     color: black;
 }
+#input-ingredient{
+    display: none;
+}
+#contnerIngredients{
+    border-radius: 5px;
+background: #FFF;
+padding: 5px;
+}
