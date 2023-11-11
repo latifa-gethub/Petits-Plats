@@ -83,7 +83,7 @@ h1{
     display: flex;
     flex-direction: column;
 }
-.Recette{
+.Recettes{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -128,11 +128,42 @@ h4{font-weight: 500;
     font-size: 14px;
     color: black;
 }
-#input-ingredient{
-    display: none;
-}
-#contnerIngredients{
+.ingridient-estensils{
+    width: 190px;
+    background-color: white;
     border-radius: 5px;
-background: #FFF;
-padding: 5px;
+    margin-left: 2.5rem;
+} 
+.contnerIngredients{
+    list-style-type: none;     
+    background: #FFF; 
+}
+.input-list{
+     display: none;
+    margin-left: 5px;
+    height: 250px;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+     overflow: hidden;
+}
+.visible{
+    display: block;
+}
+.contner-button-ingredients{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 120px;
+    height: 40px;
+    background-color: white;
+    border-radius: 5px;
+}
+.button-ingredient{
+    background-color: white;
+    border: none;
+}
+.input-ingredient{
+    width: 110px;    
 }
