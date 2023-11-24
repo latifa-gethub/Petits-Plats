@@ -88,6 +88,7 @@ h1{
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
+     margin-top: 3rem;
 }
 .info-recette{
     height: 500px;
@@ -128,34 +129,70 @@ h4{font-weight: 500;
     font-size: 14px;
     color: black;
 }
-.ingridient-estensils{
+.choix{
+    display: flex;
+    height: 200px;
+}
+.list{
     width: 190px;
     background-color: white;
-    border-radius: 5px;
-    margin-left: 2.5rem;
+    border-radius: 5px ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 } 
-.contnerIngredients{
+.list-tags{
+    margin-left: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 225px;
+}
+.tags-ingredient,.tags-appliance,.tags-ustensils{
+    display: flex;
+    flex-direction: column;
+gap: 5px;
+    height: 30%;
+}
+.contner-tag-close{
+    background-color: #FFD15B;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+    width: 150px;
+    height: 23px;
+    align-items: center;
+}
+.contnerIngredients,.contnerAppliances,.contnerUstensils{
     list-style-type: none;     
     background: #FFF; 
 }
-.input-list{
-     display: none;
-    margin-left: 5px;
-    height: 250px;
-    width: 100%;
-    position: absolute;
+ 
+.input-list,.input-list-appliance,.input-list-ustensils{ 
+ display: none;
+ height: 145px;
+     /*   position: absolute;
+        top: 100%;
+      
     z-index: 1;
-    background-color: white;
-     overflow: hidden;
+   */     
+    overflow: hidden;     
+    width:90%;    
+    background-color: white;     
+     border-radius: 0 0 5px 5px;
 }
 .visible{
     display: block;
 }
-.contner-button-ingredients{
+.contner-button-chevron,
+.contner-button-chevron-appliance,
+.contner-button-chevron-ustensils{
+     
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 120px;
+    height: 40px;
+    width: 100%;
     height: 40px;
     background-color: white;
     border-radius: 5px;
@@ -164,6 +201,12 @@ h4{font-weight: 500;
     background-color: white;
     border: none;
 }
-.input-ingredient{
-    width: 110px;    
-}
+ .input-ingredient,.input-appliance,.input-ustensils{
+    
+    height: 25px;
+    border: #d7d4d4 solid 2px;
+ }
+ .message-searchbar{
+    color: red;
+    font-size: 28px;
+ }
