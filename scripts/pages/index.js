@@ -123,7 +123,7 @@ function filtrer(tabAllUstensils, recipes) {
             i
           ].textContent.toLowerCase();
           tabListUstensilschoisis[i].style.backgroundColor = '#FFD15B';
-          console.log('la valeur clicker', tagChoisis);
+
           const tags = document.querySelector('.tags-ustensils');
 
           if (alltag.includes(tagChoisis) == false) {
@@ -140,7 +140,6 @@ function filtrer(tabAllUstensils, recipes) {
           let recipesFinall = [];
 
           if (cumule.length === 0) {
-            console.log('tag choisi', tagChoisis);
             recipesFinall = recipes.filter(recette =>
               recette.ustensils.some(el =>
                 el.toLowerCase().includes(tagChoisis)
@@ -152,7 +151,6 @@ function filtrer(tabAllUstensils, recipes) {
               el.ustensils.some(item => item.toLowerCase().includes(tagChoisis))
             );
           }
-          console.log('recipe final au choix ustensils', recipesFinall);
 
           const tabTagSelectioner = document.querySelectorAll(
             '.contner-tag-close'
@@ -175,8 +173,8 @@ function filtrer(tabAllUstensils, recipes) {
                 let recipesRestant = recipes;
                 for (let i = 0; i < alltag.length; i++) {
                   recipesRestant = recipesRestant.filter(el =>
-                    el.ingredients.some(item =>
-                      item.ingredient.toLowerCase().includes(alltag[i])
+                    el.ustensils.some(item =>
+                      item.toLowerCase().includes(alltag[i])
                     )
                   );
                   recipesFinall = recipesRestant;
@@ -257,9 +255,6 @@ function filtrerAppliances(tabAllAppliances, recipes) {
           let recipesFinall = [];
 
           if (cumule.length === 0) {
-            console.log('les recipes reçu des le debut', recipes);
-            console.log('tag choisi', tagChoisis);
-
             recipesFinall = recipes.filter(recipe =>
               recipe.appliance.toLowerCase().includes(tagChoisis)
             );
@@ -271,7 +266,6 @@ function filtrerAppliances(tabAllAppliances, recipes) {
               )
             );
           }
-          console.log('recipe final au choix dingredient', recipesFinall);
 
           const tabTagSelectioner = document.querySelectorAll(
             '.contner-tag-close'
@@ -285,7 +279,6 @@ function filtrerAppliances(tabAllAppliances, recipes) {
                 const tagIngredientsup = tabTagSelectioner[i].querySelector(
                   '.tag-choisis'
                 ).textContent;
-                console.log('tag ingredient supprimer', tagIngredientsup);
 
                 //actualiser alltag au supression d'un tag
                 alltag = alltag.filter(function(item) {
@@ -356,7 +349,6 @@ function filtrerIngredients(tabAllIngredients, recipes) {
         const tagChoisis = tabListIgredientchoisis[i].textContent.toLowerCase();
         tabListIgredientchoisis[i].style.backgroundColor = '#FFD15B';
 
-        console.log('la valeur clicker', tagChoisis);
         if (alltag.includes(tagChoisis) == false) {
           alltag.push(tagChoisis);
         }
@@ -371,8 +363,6 @@ function filtrerIngredients(tabAllIngredients, recipes) {
         let recipesFinall = [];
 
         if (cumule.length === 0) {
-          console.log('les recipes reçu des le debut', recipes);
-          console.log('tag choisi', tagChoisis);
           recipesFinall = recipes.filter(el =>
             el.ingredients.some(item =>
               item.ingredient.toLowerCase().includes(tagChoisis)
@@ -400,12 +390,11 @@ function filtrerIngredients(tabAllIngredients, recipes) {
               const tagIngredientsup = tabTagSelectioner[i].querySelector(
                 '.tag-choisis'
               ).textContent;
-              console.log('tag ingredient supprimer', tagIngredientsup);
 
               alltag = alltag.filter(function(item) {
                 return item !== tagIngredientsup;
               });
-              console.log('tag qui reste', alltag);
+
               let recipesRestant = recipes;
               for (let i = 0; i < alltag.length; i++) {
                 recipesRestant = recipesRestant.filter(el =>
@@ -415,13 +404,12 @@ function filtrerIngredients(tabAllIngredients, recipes) {
                 );
                 recipesFinall = recipesRestant;
               }
-              console.log('recipes restant aprés sup tag', recipesFinall);
+
               sectionRecette.innerHTML = '';
               getRecettes(recipesFinall);
               getAllUstensils(recipesFinall);
               getAllAppliances(recipesFinall);
               if (alltag.length === 0) {
-                console.log('ne ya plus de tag voila les recipes', recipes);
                 sectionRecette.innerHTML = '';
                 getRecettes(recipes);
                 getAllIngredient(recipes);
