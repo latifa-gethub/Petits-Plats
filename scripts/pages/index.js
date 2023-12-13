@@ -29,10 +29,9 @@ const contnerUstensils = document.querySelector('.contnerUstensils');
 const InputIngredient = document.querySelector('.input-ingredient');
 const sectionRecette = document.querySelector('.Recettes');
 const InputAppliance = document.querySelector('.input-appliance');
-const inputUstensils = document.querySelector('.input-ustensils'); 
+const inputUstensils = document.querySelector('.input-ustensils');
 const tags = document.querySelector('.tags-ingredient');
 
- 
 /**
  * permet d'appeler la template pour génerer les cartes recette
  * @param {[]} recipes 
@@ -87,7 +86,7 @@ function getAllUstensils(recipes) {
   filtrer(allUstensils, recipes);
   // return allUstensils;
 }
- 
+
 /**
  * 
  * @param {string[]} tabAllUstensils 
@@ -98,21 +97,21 @@ function filtrer(tabAllUstensils, recipes) {
   let alltag = [];
   contnerUstensils.innerHTML = '';
   tabAllUstensils.forEach(el => {
-    contnerUstensils.innerHTML += `<li class="list-ingredient">${el}</li>`;
-//recuperer la valeur de l'input ustensils
+    contnerUstensils.innerHTML += `<li class="list-ustensils">${el}</li>`;
+    //recuperer la valeur de l'input ustensils
     inputUstensils.addEventListener('keyup', function Recherche(e) {
       const valueInput = e.target.value.toLowerCase();
-//filtrer la liste des ustensils qui ont la valeur input
+      //filtrer la liste des ustensils qui ont la valeur input
       const ustensilsrechercher = tabAllUstensils.filter(el =>
         el.toLowerCase().includes(valueInput)
       );
-       //lister les ustensils par rapport au recherche
+      //lister les ustensils par rapport au recherche
       contnerUstensils.innerHTML = '';
       ustensilsrechercher.forEach(el => {
-        contnerUstensils.innerHTML += `<li class="list-ingredient">${el}</li>`;
+        contnerUstensils.innerHTML += `<li class="list-ustensils">${el}</li>`;
       });
       const tabListUstensilschoisis = document.querySelectorAll(
-        '.list-ingredient'
+        '.list-ustensils'
       );
 
       for (let i = 0; i < tabListUstensilschoisis.length; i++) {
@@ -124,13 +123,13 @@ function filtrer(tabAllUstensils, recipes) {
             i
           ].textContent.toLowerCase();
           tabListUstensilschoisis[i].style.backgroundColor = '#FFD15B';
-          console.log('la valeur clicker', tagChoisis);
+
           const tags = document.querySelector('.tags-ustensils');
 
           if (alltag.includes(tagChoisis) == false) {
             alltag.push(tagChoisis);
           }
-//on boucle sur alltag pour les lister
+          //on boucle sur alltag pour les lister
           tags.innerHTML = '';
           alltag.forEach(el => {
             tags.innerHTML += `<div class="contner-tag-close">
@@ -141,8 +140,6 @@ function filtrer(tabAllUstensils, recipes) {
           let recipesFinall = [];
 
           if (cumule.length === 0) {
-            
-            console.log('tag choisi', tagChoisis);
             recipesFinall = recipes.filter(recette =>
               recette.ustensils.some(el =>
                 el.toLowerCase().includes(tagChoisis)
@@ -154,7 +151,6 @@ function filtrer(tabAllUstensils, recipes) {
               el.ustensils.some(item => item.toLowerCase().includes(tagChoisis))
             );
           }
-          console.log('recipe final au choix ustensils', recipesFinall);
 
           const tabTagSelectioner = document.querySelectorAll(
             '.contner-tag-close'
@@ -165,20 +161,20 @@ function filtrer(tabAllUstensils, recipes) {
             for (let i = 0; i < tabiconClose.length; i++) {
               tabiconClose[i].addEventListener('click', function() {
                 tabTagSelectioner[i].remove();
-                const tagIngredientsup = tabTagSelectioner[i].querySelector(
+                const tagUstensilsup = tabTagSelectioner[i].querySelector(
                   '.tag-choisis'
                 ).textContent;
-                 
-              //actualiser alltag au supression d'un tag
+
+                //actualiser alltag au supression d'un tag
                 alltag = alltag.filter(function(item) {
-                  return item !== tagIngredientsup;
+                  return item !== tagUstensilsup;
                 });
-                 
+
                 let recipesRestant = recipes;
                 for (let i = 0; i < alltag.length; i++) {
                   recipesRestant = recipesRestant.filter(el =>
-                    el.ingredients.some(item =>
-                      item.ingredient.toLowerCase().includes(alltag[i])
+                    el.ustensils.some(item =>
+                      item.toLowerCase().includes(alltag[i])
                     )
                   );
                   recipesFinall = recipesRestant;
@@ -189,7 +185,6 @@ function filtrer(tabAllUstensils, recipes) {
                 getAllIngredient(recipesFinall);
                 getAllAppliances(recipesFinall);
                 if (alltag.length === 0) {
-                   
                   sectionRecette.innerHTML = '';
                   getRecettes(recipes);
                   getAllIngredient(recipes);
@@ -220,14 +215,14 @@ function filtrerAppliances(tabAllAppliances, recipes) {
   contnerAppliances.innerHTML = '';
   tabAllAppliances.forEach(el => {
     contnerAppliances.innerHTML += `<li class="list-ingredient">${el}</li>`;
-//recuperer la valeur de l'input appliance
+    //recuperer la valeur de l'input appliance
     InputAppliance.addEventListener('keyup', function Recherche(e) {
       const valueInput = e.target.value.toLowerCase();
-//filtrer la liste des appliances qui ont la valeur input
+      //filtrer la liste des appliances qui ont la valeur input
       const appliancesRechercher = tabAllAppliances.filter(el =>
         el.toLowerCase().includes(valueInput)
       );
-       //lister les appliances par rapport au recherche
+      //lister les appliances par rapport au recherche
       contnerAppliances.innerHTML = '';
       appliancesRechercher.forEach(el => {
         contnerAppliances.innerHTML += `<li class="list-appliance">${el}</li>`;
@@ -245,7 +240,7 @@ function filtrerAppliances(tabAllAppliances, recipes) {
           ].textContent.toLowerCase();
           tabListApplianceschoisis[i].style.backgroundColor = '#FFD15B';
           const tags = document.querySelector('.tags-appliance');
-           
+
           if (alltag.includes(tagChoisis) == false) {
             alltag.push(tagChoisis);
           }
@@ -257,13 +252,9 @@ function filtrerAppliances(tabAllAppliances, recipes) {
       <i class="fa-solid fa-close"></i></div>`;
           });
 
-         
           let recipesFinall = [];
 
           if (cumule.length === 0) {
-            console.log('les recipes reçu des le debut', recipes);
-            console.log('tag choisi', tagChoisis);
-
             recipesFinall = recipes.filter(recipe =>
               recipe.appliance.toLowerCase().includes(tagChoisis)
             );
@@ -275,12 +266,11 @@ function filtrerAppliances(tabAllAppliances, recipes) {
               )
             );
           }
-          console.log('recipe final au choix dingredient', recipesFinall);
 
           const tabTagSelectioner = document.querySelectorAll(
             '.contner-tag-close'
           );
-       //boucler sur les tags choisis pour supprimer un tag au click sur l'icon close
+          //boucler sur les tags choisis pour supprimer un tag au click sur l'icon close
           for (let i = 0; i < tabTagSelectioner.length; i++) {
             const tabiconClose = document.querySelectorAll('.fa-close');
             for (let i = 0; i < tabiconClose.length; i++) {
@@ -298,24 +288,19 @@ function filtrerAppliances(tabAllAppliances, recipes) {
                 console.log('tag qui reste', alltag);
                 let recipesRestant = recipes;
                 for (let i = 0; i < alltag.length; i++) {
-                   
-
-                  
                   recipesRestant = recipesRestant.filter(el =>
                     el.ingredients.some(item =>
                       item.ingredient.toLowerCase().includes(alltag[i])
                     )
                   );
                   recipesFinall = recipesRestant;
-                   
                 }
-                 
+
                 sectionRecette.innerHTML = '';
                 getRecettes(recipesFinall);
                 getAllUstensils(recipesFinall);
                 getAllAppliances(recipesFinall);
                 if (alltag.length === 0) {
-                  
                   sectionRecette.innerHTML = '';
                   getRecettes(recipes);
                   getAllIngredient(recipes);
@@ -365,7 +350,6 @@ function filtrerIngredients(tabAllIngredients, recipes) {
         const tagChoisis = tabListIgredientchoisis[i].textContent.toLowerCase();
         tabListIgredientchoisis[i].style.backgroundColor = '#FFD15B';
 
-        console.log('la valeur clicker', tagChoisis);
         if (alltag.includes(tagChoisis) == false) {
           alltag.push(tagChoisis);
         }
@@ -380,8 +364,6 @@ function filtrerIngredients(tabAllIngredients, recipes) {
         let recipesFinall = [];
 
         if (cumule.length === 0) {
-          console.log('les recipes reçu des le debut', recipes);
-          console.log('tag choisi', tagChoisis);
           recipesFinall = recipes.filter(el =>
             el.ingredients.some(item =>
               item.ingredient.toLowerCase().includes(tagChoisis)
@@ -395,7 +377,6 @@ function filtrerIngredients(tabAllIngredients, recipes) {
             )
           );
         }
-        console.log('recipe final au choix dingredient', recipesFinall);
 
         const tabTagSelectioner = document.querySelectorAll(
           '.contner-tag-close'
@@ -509,8 +490,40 @@ inputSearchbarPrincipal.addEventListener('keyup', function search_recette(e) {
   } else {
     error.innerHTML = '';
     let valueSerchbar = e.target.value.toLowerCase();
-
-    const recipesInitial = recettesFiltrer(valueSerchbar);
+    /**
+       * la recherche avec les boucles natives des recettes correspond à l'entrèe utilisateur 
+       * dans le nom,la description,les ingredients de recettes  
+       * @param {*} valueSerchbar 
+       * @returns tableau des recettes qui ont la valeur de searchbar
+       */
+    function testNative(valueSerchbar) {
+      let tabcumuleRecipes = [];
+      for (let i = 0; i < recipes.length; i++) {
+        if (recipes[i].name.toLowerCase().includes(valueSerchbar)) {
+          tabcumuleRecipes.push(recipes[i]);
+        } else if (
+          recipes[i].description.toLowerCase().includes(valueSerchbar)
+        ) {
+          tabcumuleRecipes.push(recipes[i]);
+        } else {
+          for (let j = 0; j < recipes[i].ingredients[j].length; j++) {
+            console.log(
+              'boocle sur ingredients',
+              recipes[i].ingredients[j].ingredient
+            );
+            if (
+              recipes[i].ingredients[j].ingredient
+                .toLocaleLowerCase()
+                .includes(valueSerchbar)
+            ) {
+              tabcumuleRecipes.push(recipes[i]);
+            }
+          }
+        }
+      }
+      return tabcumuleRecipes;
+    }
+    const recipesInitial = testNative(valueSerchbar);
     if (recipesInitial == 0) {
       messageSearchbar.innerHTML = ` Aucune recette ne contient ${valueSerchbar} vous pouvez chercher «
                       tarte aux pommes », « poisson », etc.`;
@@ -524,45 +537,8 @@ inputSearchbarPrincipal.addEventListener('keyup', function search_recette(e) {
       getAllAppliances(recipesInitial);
       getAllIngredient(recipesInitial);
       getAllUstensils(recipesInitial);
-      //la recherche avec la boucle native
+       
       testNative(valueSerchbar);
-      /**
-       * la recherche avec les boucles natives des recettes correspond à l'entrèe utilisateur 
-       * dans le nom,la description,les ingredients de recettes  
-       * @param {*} valueSerchbar 
-       * @returns tableau des recettes qui ont la valeur de searchbar
-       */
-      function testNative(valueSerchbar) {
-        let tabcumuleRecipes = [];
-        for (let i = 0; i < recipes.length; i++) {
-          if (recipes[i].name.toLowerCase().includes(valueSerchbar)) {
-            tabcumuleRecipes.push(recipes[i]);
-          } else if (
-            recipes[i].description.toLowerCase().includes(valueSerchbar)
-          ) {
-            tabcumuleRecipes.push(recipes[i]);
-          } else {
-            for (let j = 0; j < recipes[i].ingredients[j].length; j++) {
-              console.log(
-                'boocle sur ingredients',
-                recipes[i].ingredients[j].ingredient
-              );
-              if (
-                recipes[i].ingredients[j].ingredient
-                  .toLocaleLowerCase()
-                  .includes(valueSerchbar)
-              ) {
-                tabcumuleRecipes.push(recipes[i]);
-              }
-            }
-          }
-          console.log(
-            'tab cumule recipes avec boucle native',
-            tabcumuleRecipes
-          );
-          return tabcumuleRecipes;
-        }
-      }
     }
   }
 });
@@ -588,6 +564,5 @@ function init() {
   getAllIngredient(recipes);
   getAllAppliances(recipes);
   getAllUstensils(recipes);
-   
 }
 init();
