@@ -83,12 +83,12 @@ function getAllUstensils(recipes) {
   );
   const allUstensils = [...new Set(ustensils)];
 
-  filtrer(allUstensils, recipes);
-  // return allUstensils;
+  filtrer(allUstensils, recipes);   
 }
 
 /**
- * 
+ *  permet de rajouter la liste des ustensils restantes et preciser un ustensil dans l'input
+ * et selectionner et rajouter les tags ustensil souhaité et actualiser l'interface
  * @param {string[]} tabAllUstensils 
  * @param {Array<object>} recipes 
  */
@@ -205,7 +205,8 @@ function filtrer(tabAllUstensils, recipes) {
 }
 
 /**
- * 
+ *  permet de rajouter la liste des appliances restantes et preciser un appliance dans l'input
+ * et selectionner et rajouter les tags appliance souhaité et actualiser l'interface
  * @param {string[]} tabAllAppliances 
  * @param {Array<object>} recipes 
  */
@@ -318,6 +319,13 @@ function filtrerAppliances(tabAllAppliances, recipes) {
     });
   });
 }
+
+ /**
+  * permet de rajouter la liste des imgredients restantes et preciser un ingredient dans l'input
+  * et selectionner et rajouter les tags ingredient souhaité et actualiser l'interface
+  * @param {string[]} tabAllIngredients 
+  * @param {[]} recipes 
+  */
 
 function filtrerIngredients(tabAllIngredients, recipes) {
   let cumule = [];
@@ -507,7 +515,7 @@ inputSearchbarPrincipal.addEventListener('keyup', function search_recette(e) {
   }
 });
 /**
- * permet d'appeler la template pour les ingredient de chaque recettes
+ * permet d'appeler la template pour les ingredient de chaque recettes sur les carte
  * @param {*} recette 
  * @param {*} index 
  */

@@ -51,13 +51,11 @@ function recetteTemplate(recette){
                                 
     }
     function listRecette(){
-       const list=document.querySelector(".list")
+       const list=document.querySelector(".list")       
        list.innerHTML=`<li class="name-recette">${name}</li>`
        return list
     }
     
-    return {lienImageRecette,cartDomRecettes,cartDomIngredients,listRecette}
-
-    
+    return {lienImageRecette,cartDomRecettes,cartDomIngredients,listRecette}    
    
 }
